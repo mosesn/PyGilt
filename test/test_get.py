@@ -4,7 +4,6 @@ from os import getenv
 
 class TestGet(unittest.TestCase):
    def setUp(self):
-      # !!! get this from an environment variable !!
       api_key = getenv("GILTAPIKEY")
       if api_key == None:
          raise Exception("Set the environment variable GILTAPIKEY to your API key")
@@ -32,20 +31,3 @@ class TestGet(unittest.TestCase):
       image = product.images[0]
       # print "Found Product image = %s" % image.url
       self.assertTrue(image.width > 10)
-
-"""
-
-active_sales = giltClient.active("men")
-
-for sale in active_sales:
-   print sale.name
-   print sale.products
-   product_uris = sale.products
-   for product_uri in product_uris:
-      print "product URI is %s" % product_uri
-      product = giltClient.product_detail(product_uri)
-      for image in product.image_urls:
-         print "image url %s" % image.url
-         print "image width %d" % image.width
-      print "product name is %s" % product.name
-"""
