@@ -31,3 +31,12 @@ class TestGet(unittest.TestCase):
       image = product.images[0]
       # print "Found Product image = %s" % image.url
       self.assertTrue(image.width > 10)
+
+   def test_product_sku(self):
+      active_sales = self.giltClient.active("kids")
+      sale = active_sales[0]
+      product_url = sale.product_urls[0]
+      product = self.giltClient.product_detail(product_url)
+      sku = product.skus[0]
+      # for sku in product.skus:
+      #    print "sku id is %s" % sku.id
