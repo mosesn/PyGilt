@@ -2,7 +2,7 @@ from Image import Image
 
 from SKU import make_sku
 
-class Product:
+class Product(object):
     def __init__(self, name, product, product_id, brand, url, image_urls,
                  skus, description="", fit_notes="", material="",
                  care_instructions="", origin=""):
@@ -11,20 +11,15 @@ class Product:
         self.product_id = product_id
         self.brand = brand
         self.url = url
-        self.image_urls = [Image(img["url"], img["width"], img["height"])
+        self.images = [Image(img["url"], img["width"], img["height"])
                            for img_lst in image_urls.values()
                            for img in img_lst]
         self.skus = [make_sku(sku) for sku in skus]
-        if description:
-            self.description = description
-        if fit_notes:
-            self.fit_notes = fit_notes
-        if material:
-            self.material = material
-        if care_instructions:
-            self.care_instructions = care_instructions
-        if origin:
-            self.origin = origin
+        self.description = description
+        self.fit_notes = fit_notes
+        self.material = material
+        self.care_instructions = care_instructions
+        self.origin = origin
 
 def make_product(pmap):
     description = pmap.get("description", "")
